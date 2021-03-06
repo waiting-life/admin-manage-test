@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list-container">
+  <div class="question-container">
     <el-table
       :data="filterData"
       style="width: 100%"
@@ -7,33 +7,34 @@
       <el-table-column
         fixed
         prop="_id"
-        label="ID"
-        width="300">
+        label="问题ID"
+        width="250">
+      </el-table-column>
+      <el-table-column
+        fixed
+        prop="userId"
+        label="用户ID"
+        width="250">
       </el-table-column>
       <el-table-column
         prop="nickname"
-        label="昵称"
-        width="200">
-      </el-table-column>
-      <el-table-column
-        prop="gender"
-        label="性别"
+        label="提问人"
         width="150">
       </el-table-column>
       <el-table-column
-        prop="phoneNumber"
-        label="电话号码"
+        prop="content"
+        label="提问内容"
+        width="1800">
+      </el-table-column>
+      <el-table-column
+        prop="title"
+        label="问题标题"
         width="300">
       </el-table-column>
       <el-table-column
-        prop="created_time"
-        label="创建时间"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="fans"
-        label="粉丝"
-        width="120">
+        prop="createTime"
+        label="提问时间"
+        width="400">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -41,7 +42,7 @@
         width="120">
         <template slot-scope="scope">
           <el-button
-            @click.native.prevent="deleteUser(scope.$index, tableData)"
+            @click.native.prevent="deleteQuestion(scope.$index, tableData)"
             type="text"
             size="small">
             移除
@@ -65,26 +66,25 @@
 import PaginationCom from 'components/common/PaginationCom'
 import mixin from 'views/mixins'
 export default {
+  components: {
+    PaginationCom
+  },
   mixins: [mixin],
   data () {
     return {
     }
   },
-  components: {
-    PaginationCom
-  },
   created () {
-    this.getAllUsers()  
+    this.getAllQuestions()  
   },
-  mounted () { },
   methods: {
-    async getAllUsers() {
-      const res = await fetch('/getAllUsers')
+    async getAllQuestions() {
+      const res = await fetch('/allQuestions')
       const { data } = await res.json()
-      this.tableData = data
+      this.tableData = data[0]
       this.total = this.tableData.length
     },
-    deleteUser(index, tableData) {
+    deleteQuestion(index, tableData) {
       console.log(index, tableData)
     }
   }

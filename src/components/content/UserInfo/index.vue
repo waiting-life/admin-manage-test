@@ -4,7 +4,7 @@
       <img src="~assets/image/lgAvatar.jpg" alt="">
     </div>
     <div class="user-nickname">
-      昵称: {{ userInfo.nickname }}
+      {{ userInfo.nickname }}
     </div>
   </div>
 </template>
@@ -58,6 +58,7 @@ export default {
 .user-info {
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 .user-avatar {
   width: 40px;

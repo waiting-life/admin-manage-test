@@ -28,21 +28,54 @@ const routes = [
         component: () => import('views/Dashboard'),
         meta: {
           title: 'Dashboard',
-          icon: 'dashboard'
         }
-      },
+      }
+    ]
+  },
+  {
+    path: '/usermanage',
+    name: 'usermanage',
+    component: Layout,
+    meta: {
+      title: '用户管理'
+    },
+    redirect: '/usermanage/userlist',
+    children: [
       {
         path: 'userlist',
         name: 'userlist',
         component: () => import('views/UserList'),
         meta: {
-          title: 'UserList',
-          icon: 'userlist'
+          title: '用户列表',
+        }
+      },
+      {
+        path: 'questionlist',
+        name: 'questionlist',
+        component: () => import('views/QuestionList'),
+        meta: {
+          title: '问题列表',
+        }
+      },
+      {
+        path: 'answerlist',
+        name: 'answerlist',
+        component: () => import('views/AnswerList'),
+        meta: {
+          title: '回答列表'
+        }
+      },
+      {
+        path: 'commentlist',
+        name: 'commentlist',
+        component: () => import('views/CommentList'),
+        meta: {
+          title: '评论列表',
         }
       }
     ]
   },
-   {
+  {
     path: '*',
     component: () => import('views/404')
   },

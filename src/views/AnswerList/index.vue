@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list-container">
+  <div class="question-container">
     <el-table
       :data="filterData"
       style="width: 100%"
@@ -7,33 +7,38 @@
       <el-table-column
         fixed
         prop="_id"
-        label="ID"
-        width="300">
+        label="回答ID"
+        width="250">
       </el-table-column>
       <el-table-column
-        prop="nickname"
-        label="昵称"
+        prop="userId"
+        label="用户ID"
+        width="250">
+      </el-table-column>
+      <el-table-column
+        prop="questionId"
+        label="问题ID"
+        width="250">
+      </el-table-column>
+      <el-table-column
+        prop="answer_nickname"
+        label="回答人"
         width="200">
       </el-table-column>
       <el-table-column
-        prop="gender"
-        label="性别"
-        width="150">
+        prop="answer_content"
+        label="回答内容"
+        width="800">
       </el-table-column>
       <el-table-column
-        prop="phoneNumber"
-        label="电话号码"
-        width="300">
+        prop="follow_counts"
+        label="关注者"
+        width="200">
       </el-table-column>
       <el-table-column
-        prop="created_time"
-        label="创建时间"
-        width="300">
-      </el-table-column>
-      <el-table-column
-        prop="fans"
-        label="粉丝"
-        width="120">
+        prop="good_counts"
+        label="点赞数"
+        width="200">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -41,7 +46,7 @@
         width="120">
         <template slot-scope="scope">
           <el-button
-            @click.native.prevent="deleteUser(scope.$index, tableData)"
+            @click.native.prevent="deleteAnswer(scope.$index, tableData)"
             type="text"
             size="small">
             移除
@@ -65,26 +70,25 @@
 import PaginationCom from 'components/common/PaginationCom'
 import mixin from 'views/mixins'
 export default {
+  components: {
+    PaginationCom
+  },
   mixins: [mixin],
   data () {
     return {
     }
   },
-  components: {
-    PaginationCom
-  },
   created () {
-    this.getAllUsers()  
+    this.getAllAnswers()  
   },
-  mounted () { },
   methods: {
-    async getAllUsers() {
-      const res = await fetch('/getAllUsers')
+    async getAllAnswers() {
+      const res = await fetch('/getAllAnswers')
       const { data } = await res.json()
       this.tableData = data
       this.total = this.tableData.length
     },
-    deleteUser(index, tableData) {
+    deleteComment(index, tableData) {
       console.log(index, tableData)
     }
   }

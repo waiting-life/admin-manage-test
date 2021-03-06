@@ -340,7 +340,24 @@ router
       }
     }
   })
-
+  // 获取所有回答
+  .get('/getAllAnswers', async ctx => {
+    try {
+      const data = await Answer.find()
+      if (data) {
+        ctx.body = {
+          data: data,
+          err_code: 0,
+          message: 'Ok'
+        }
+      }
+    } catch {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
   // 评论接口部分
   .post('/addCommentByAid', async ctx => {
     const body = ctx.request.body
@@ -370,6 +387,24 @@ router
         data: data,
         err_code: 0,
         message: 'Ok'
+      }
+    } catch {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
+  // 获取所有评论
+  .get('/getAllComments', async ctx => {
+    try {
+      const data = await Comment.find()
+      if (data) {
+        ctx.body = {
+          data: data,
+          err_code: 0,
+          message: 'Ok'
+        }
       }
     } catch {
       ctx.body = {

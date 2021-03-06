@@ -6,6 +6,7 @@
     </div>
     <div class="header-right">
       <user-info/>
+      <header-dropdown/>
     </div>
   </div>
 </template>
@@ -14,6 +15,7 @@
 import Hamburger from 'components/common/Hamburger'
 import BreadCrumb from 'components/common/BreadCrumb'
 import UserInfo from 'components/content/UserInfo'
+import HeaderDropdown from 'components/content/HeaderDropdown'
 export default {
   data() {
     return {
@@ -23,7 +25,8 @@ export default {
   components: {
     Hamburger,
     BreadCrumb,
-    UserInfo
+    UserInfo,
+    HeaderDropdown
   },
   methods: {
 
@@ -40,10 +43,14 @@ export default {
   height: 60px;
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(192, 197, 197, 0.2);
+  margin-bottom: 40px;
 }
 .header-left {
   display: flex;
   align-items: center;
 }
-
+.header-right {
+  display: flex;
+  align-items: center;
+}
 </style>

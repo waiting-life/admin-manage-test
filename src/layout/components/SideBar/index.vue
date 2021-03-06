@@ -9,7 +9,8 @@
       <div class="left-item side-logo">
         <img src="~assets/image/icon-only.png" alt="">
       </div>
-      <el-menu-item index="1">
+      <el-menu-item index="1" @click="toHome">
+        <i class="el-icon-s-home"></i>
         <span slot="title">Dashboard</span>
       </el-menu-item>
       <el-menu-item index="2">
@@ -23,23 +24,27 @@
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-folder"></i>
-          <span slot="title">权限列表</span>
+          <span slot="title">用户管理</span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="4-1">
-            <router-link :to="{ name: 'userlist' }">用户列表</router-link>
+            <!-- <router-link :to="{ path: '/usermanage' }">用户列表</router-link> -->
+            <router-link :to="{ name: 'usermanage' }" class="link">用户列表</router-link>
           </el-menu-item>
           <el-menu-item index="4-2">
-            角色列表
+            <router-link :to="{ path: '/usermanage/questionlist'}" class="link">问题列表</router-link>
           </el-menu-item>
-          <el-menu-item index="4-3">
-            权限列表
+          <el-menu-item index="4-2">
+            <router-link :to="{ path: '/usermanage/answerlist'}" class="link">回答列表</router-link>
+          </el-menu-item>
+          <el-menu-item index="4-2">
+            <router-link :to="{ path: '/usermanage/commentlist'}" class="link">评论列表</router-link>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="5">
         <i class="el-icon-folder"></i>
-        <span slot="title">问题列表</span>
+        <span slot="title">其他列表</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -55,6 +60,11 @@ export default {
   computed: {
     ...mapState(['isCollapse'])
   },
+  methods: {
+    toHome() {
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
@@ -75,8 +85,12 @@ export default {
     height: 100vh;
   }
 
-  /* .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
+  }
+  /* .link {
+    display: block;
+    width: 100%;
   } */
 </style>
