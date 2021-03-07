@@ -48,7 +48,6 @@ router
           message: 'Server error'
         }
     }
-    
     // let data = await User.findOne({
     //   nickname: body.nickname
     // }, (err, data) => {
@@ -126,6 +125,24 @@ router
   //     }
   //   }
   // }) 
+  .post('/deleteUser', async ctx => {
+    const body = ctx.request.body
+    const user_id = body.userId
+    try {
+      const data = await User.findByIdAndDelete(user_id)
+      if (data) {
+        ctx.body = {
+          err_code: 0,
+          message: 'Ok'
+        }
+      }
+    } catch  {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
   .get('/getAllUsers', async ctx => {
     try {
       const data = await User.find()
@@ -164,6 +181,8 @@ router
       }
     }
   })
+
+  // 添加一个问题
   .post('/addQuestion', async ctx => {
     // 添加问题
     const body = ctx.request.body
@@ -180,13 +199,31 @@ router
       }
     }
   })
+  // 删除一个问题
+  .post('/deleteQuestion', async ctx => {
+    const body = ctx.request.body
+    try {
+      const data = await Question.findByIdAndDelete(body._id)
+      if (data) {
+        ctx.body = {
+          err_code: 0,
+          message: 'OK',
+        }
+      }
+    } catch {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
   .get('/allQuestions', async ctx => {
     // 获取所有问题接口
     let data = await Question.find()
     ctx.body = {
       err_code: 0,
       message: 'Ok',
-      data: [data]
+      data: data
     }
   })
   .post('/deleteQuestion', async ctx => {
@@ -302,6 +339,7 @@ router
       }
     }
   })
+
   // 添加回答
   .post('/addAnswer', async ctx => {
     const body = ctx.request.body
@@ -312,6 +350,25 @@ router
         message: '回答成功！',
       }
     } catch {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
+  // 删除回答
+  .post('/deleteAnswer', async ctx => {
+    const body = ctx.request.body
+    try {
+      const data = await Answer.findByIdAndDelete(body._id)
+      console.log(data)
+      if (data) {
+        ctx.body = {
+          err_code: 0,
+          message: 'OK'
+        }
+      }
+    } catch  {
       ctx.body = {
         err_code: 500,
         message: 'Server error'
@@ -349,6 +406,24 @@ router
           data: data,
           err_code: 0,
           message: 'Ok'
+        }
+      }
+    } catch {
+      ctx.body = {
+        err_code: 500,
+        message: 'Server error'
+      }
+    }
+  })
+  // 删除评论
+  .post('/deleteComment', async ctx => {
+    const body = ctx.request.body
+    try {
+      const data = await Comment.findByIdAndDelete(body._id)
+      if (data) {
+        ctx.body = {
+          err_code: 0,
+          message: 'OK'
         }
       }
     } catch {

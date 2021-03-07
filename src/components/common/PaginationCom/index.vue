@@ -42,16 +42,21 @@ export default {
       default() {
         return []
       }
-    }
+    },
+    // test: {
+    //   type: Array,
+    //   default: () => {}
+    // }
   },
-  // created() {
-  //   console.log(this.total)
-  //   console.log(this.tableData)
-  //   setTimeout(() => {
-  //     console.log(this.total)
-  //     console.log(this.tableData)
-  //   }, 2000);
-  // },
+  created() {
+    // console.log(this.total)
+    // console.log(this.tableData)
+    // setTimeout(() => {
+    //   console.log(this.total)
+    //   console.log(this.tableData)
+    // }, 2000);
+    // console.log(this.test)
+  },
   methods: {
     handleSizeChange(pageSize) {
       this.$emit('handleSizeChange', pageSize)

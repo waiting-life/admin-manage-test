@@ -13,15 +13,7 @@
         <i class="el-icon-s-home"></i>
         <span slot="title">Dashboard</span>
       </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">应用管理</span>
-      </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-folder"></i>
-        <span slot="title">应用列表</span>
-      </el-menu-item>
-      <el-submenu index="4">
+      <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-folder"></i>
           <span slot="title">用户管理</span>
@@ -31,13 +23,13 @@
             <!-- <router-link :to="{ path: '/usermanage' }">用户列表</router-link> -->
             <router-link :to="{ name: 'usermanage' }" class="link">用户列表</router-link>
           </el-menu-item>
-          <el-menu-item index="4-2">
+          <el-menu-item index="2-1">
             <router-link :to="{ path: '/usermanage/questionlist'}" class="link">问题列表</router-link>
           </el-menu-item>
-          <el-menu-item index="4-2">
+          <el-menu-item index="2-2">
             <router-link :to="{ path: '/usermanage/answerlist'}" class="link">回答列表</router-link>
           </el-menu-item>
-          <el-menu-item index="4-2">
+          <el-menu-item index="2-3">
             <router-link :to="{ path: '/usermanage/commentlist'}" class="link">评论列表</router-link>
           </el-menu-item>
         </el-menu-item-group>

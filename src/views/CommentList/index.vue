@@ -1,5 +1,6 @@
 <template>
-  <div class="question-container">
+  <div class="comment-container">
+    <el-button @click="handleAdd" type="primary">+ 增加评论</el-button>
     <el-table
       :data="filterData"
       style="width: 100%"
@@ -33,7 +34,8 @@
       <el-table-column
         prop="comment_time"
         label="评论时间"
-        width="400">
+        width="400"
+        :formatter="formatter">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -41,7 +43,7 @@
         width="120">
         <template slot-scope="scope">
           <el-button
-            @click.native.prevent="deleteComment(scope.$index, tableData)"
+            @click.native.prevent="deleteComment(scope.row)"
             type="text"
             size="small">
             移除
@@ -74,7 +76,8 @@ export default {
     }
   },
   created () {
-    this.getAllComments()  
+    this.getAllComments() 
+    this.pageSize = 6 
   },
   methods: {
     async getAllComments() {
@@ -83,8 +86,47 @@ export default {
       this.tableData = data
       this.total = this.tableData.length
     },
-    deleteComment(index, tableData) {
-      console.log(index, tableData)
+    async deleteComment(item) {
+      const { _id } = item
+      try {
+        await this.$confirm('是否删除该评论, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        const res = await fetch('/deleteComment', {
+          method: 'POST',
+          body: JSON.stringify({ _id }),
+          headers: {
+            'Content-type': 'application/json; charset=utf-8'
+          }
+        })
+        const data = await res.json()
+        const code = data.err_code
+        if (code === 0) {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        } else if (code === 500) {
+          this.$message({
+            type: 'error',
+            message: 'Server error'
+          });
+        }
+        this.getAllComments()
+      } catch {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      }
+    },
+    handleAdd () {
+
+    },
+    formatter(row, column, cell) {
+      return new Date(cell).toLocaleString()
     }
   }
 }
